@@ -1,7 +1,7 @@
 /// # Example
 ///
 /// ```
-/// use testing::sploosh;
+/// # use testing::sploosh;
 /// let result = sploosh(1, 2, 3);
 /// assert_eq!(result, 4);
 /// ```
@@ -17,7 +17,7 @@ pub fn sploosh(x: i32, y: i32, z: i32) -> i32 {
 /// # Example
 ///
 /// ```
-/// use testing::splish;
+/// # use testing::splish;
 /// let result = splish(9, 3);
 /// assert_eq!(result, 0);
 /// ```
