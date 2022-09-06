@@ -5,6 +5,8 @@ edition = "2021"
 
 [dependencies]
 
+[dev-dependencies]
+criterion = { version = "0.3.6", features = ["html_reports"] }
 
 # Challenge Help 1: If you choose to take on the challenge, you'll need to add `criterion` as a
 # development dependency. Here is one way to do it:
@@ -18,6 +20,9 @@ edition = "2021"
 # [[bench]]
 # name = "somename"
 # harness = false
+[[bench]]
+name = "test_speed"
+harness = false
 
 # Challenge Help 3: The Criterion documentation has a great tutorial for how to actually write your
 # benchmark.  Don't skip the part about `black_box()`!
