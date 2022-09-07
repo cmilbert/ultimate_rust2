@@ -97,5 +97,32 @@ fn main() {
     // On the child threads print out the values you receive. Close the sending side in the main
     // thread by calling `drop(tx)` (assuming you named your sender channel variable `tx`).  Join
     // the child threads.
+    let (tx, rx) = channel::unbounded();
+    let rx2 = rx.clone();
+
+    let thread_1 = thread::spawn(move || {
+        for msg in rx {
+            println!("Thread 1 received {}", msg);
+        }
+    });
+
+    let thread_2 = thread::spawn(move || {
+        for msg in rx2 {
+            println!("Thread 2 received {}", msg);
+        }
+    });
+
+    "this is a long string that will be sent to each thread"
+        .chars()
+        .into_iter()
+        .for_each(|c| {
+            tx.send(c).expect("failed to send character");
+        });
+
+    drop(tx);
+
+    thread_1.join().expect("could not join thread_1");
+    thread_2.join().expect("could not join thread_2");
+
     println!("Main thread: Exiting.")
 }
