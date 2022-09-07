@@ -101,15 +101,13 @@ fn main() {
     let rx2 = rx.clone();
 
     let thread_1 = thread::spawn(move || {
-        for msg in rx {
-            println!("Thread 1 received {}", msg);
-        }
+        let message: Vec<char> = rx.iter().collect();
+        println!("Full message {:?}", message);
     });
 
     let thread_2 = thread::spawn(move || {
-        for msg in rx2 {
-            println!("Thread 2 received {}", msg);
-        }
+        let message: Vec<char> = rx2.iter().collect();
+        println!("Full message {:?}", message);
     });
 
     "this is a long string that will be sent to each thread"
@@ -117,6 +115,7 @@ fn main() {
         .into_iter()
         .for_each(|c| {
             tx.send(c).expect("failed to send character");
+            sleep_ms(100);
         });
 
     drop(tx);
